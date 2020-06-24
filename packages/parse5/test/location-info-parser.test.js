@@ -183,3 +183,19 @@ exports['Updating node source code location (GH-314)'] = function() {
         end: { line: 1, column: 33, offset: 32 }
     });
 };
+
+exports['Tree adapter: htmlparser2 - Regression - SVG camel case attr location lookup (GH-318)'] = function() {
+    const treeAdapter = treeAdapters.default;
+    const document = parse5.parseFragment('<svg onClick="onClick();" viewBox="0 0 100 100"></svg>', {
+        treeAdapter,
+        sourceCodeLocationInfo: true
+    });
+    const svg = document.childNodes[0];
+    const attributeLocations = svg.sourceCodeLocation.attrs;
+
+    svg.attrs.forEach(attr => {
+        const name = attr.prefix ? `${attr.prefix}:${attr.name}` : attr.name;
+
+        assert.strictEqual(name in attributeLocations, true);
+    });
+};
