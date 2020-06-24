@@ -3,6 +3,7 @@
 const Mixin = require('../../utils/mixin');
 const Tokenizer = require('../../tokenizer');
 const PositionTrackingPreprocessorMixin = require('../position-tracking/preprocessor-mixin');
+const SVG_ATTRS_ADJUSTMENT_MAP = require('../../common/foreign-content').SVG_ATTRS_ADJUSTMENT_MAP;
 
 class LocationInfoTokenizerMixin extends Mixin {
     constructor(tokenizer) {
@@ -37,7 +38,9 @@ class LocationInfoTokenizerMixin extends Mixin {
             currentToken.location.attrs = Object.create(null);
         }
 
-        currentToken.location.attrs[currentAttr.name] = this.currentAttrLocation;
+        const name = SVG_ATTRS_ADJUSTMENT_MAP[currentAttr.name] || currentAttr.name;
+
+        currentToken.location.attrs[name] = this.currentAttrLocation;
     }
 
     _getOverriddenMethods(mxn, orig) {

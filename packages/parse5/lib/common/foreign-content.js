@@ -17,7 +17,7 @@ const MIME_TYPES = {
 //Attributes
 const DEFINITION_URL_ATTR = 'definitionurl';
 const ADJUSTED_DEFINITION_URL_ATTR = 'definitionURL';
-const SVG_ATTRS_ADJUSTMENT_MAP = {
+const SVG_ATTRS_ADJUSTMENT_MAP = (exports.SVG_ATTRS_ADJUSTMENT_MAP = {
     attributename: 'attributeName',
     attributetype: 'attributeType',
     basefrequency: 'baseFrequency',
@@ -76,7 +76,7 @@ const SVG_ATTRS_ADJUSTMENT_MAP = {
     xchannelselector: 'xChannelSelector',
     ychannelselector: 'yChannelSelector',
     zoomandpan: 'zoomAndPan'
-};
+});
 
 const XML_ATTRS_ADJUSTMENT_MAP = {
     'xlink:actuate': { prefix: 'xlink', name: 'actuate', namespace: NS.XLINK },
