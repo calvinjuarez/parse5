@@ -159,8 +159,11 @@ exports['Updating node source code location (GH-314)'] = function() {
             };
         }
     };
-    const adapter = Object.assign(treeAdapters.default, sourceCodeLocationSetter);
-    const document = parse5.parse('<!doctype><body>Testing location</body>', { adapter, sourceCodeLocationInfo: true });
+    const treeAdapter = Object.assign({}, treeAdapters.default, sourceCodeLocationSetter);
+    const document = parse5.parse('<!doctype><body>Testing location</body>', {
+        treeAdapter,
+        sourceCodeLocationInfo: true
+    });
     const [doctype, html] = document.childNodes;
     const [head, body] = html.childNodes;
     const [text] = body.childNodes;
